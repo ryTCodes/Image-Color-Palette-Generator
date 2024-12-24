@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/output.css') }}"
+    />
+    <title>Color Palette Generator</title>
+  </head>
+  <body class="bg-dark-charcoal mx-2">
+    <section id="main-section" class="container mx-auto">
+      <div class="flex flex-col items-center text-center py-8">
+        <h2 class="text-2xl text-lavender-mist">Welcome to</h2>
+        <h1 class="text-4xl text-lavender-gray">
+          Image Color Palette Generator
+        </h1>
+      </div>
+      <form
+        action="{{ url_for('home_view') }}"
+        method="POST"
+        enctype="multipart/form-data"
+        class="max-w-md mx-auto bg-dark-grey p-6 rounded-xl shadow-md"
+      >
+        <div class="space-y-4">
+          <div
+            id="dropZone"
+            class="bg-dark-grey relative border-2 border-dashed border-gray-300 rounded-lg h-64 cursor-pointer hover:border-gray-400 transition-all duration-300"
+          >
+            <img
+              id="preview"
+              class="hidden w-full h-full object-contain rounded-lg"
+              alt="Preview"
+            />
+            <div
+              id="uploadText"
+              class="absolute inset-0 flex flex-col items-center justify-center text-gray-600"
+            >
+              <svg
+                class="w-12 h-12 mb-3 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
+              </svg>
+              <p class="mb-2 text-sm text-lavender-gray">
+                Click or drag to upload an image
+              </p>
+              <p class="text-xs text-lavender-gray">PNG, JPG, GIF supported</p>
+            </div>
+          </div>
+          <input
+            type="file"
+            name="file"
+            id="fileInput"
+            accept="image/*"
+            class="hidden"
+            required
+          />
+          <div class="flex gap-2">
+            <button
+              id="removeButton"
+              type="button"
+              class="hidden w-full py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-300"
+            >
+              Remove Image
+            </button>
+            <button
+              type="submit"
+              class="w-full py-2 px-4 bg-purple-soft text-white rounded-md hover:bg-purple-medium transition-colors duration-300"
+            >
+              Generate Palette
+            </button>
+          </div>
+        </div>
+      </form>
+
+      {% if colors %}
+      <div class="max-w-4xl mx-auto mt-8 p-6 bg-dark-grey rounded-xl shadow-md">
+        <table class="w-full text-lavender-gray">
+          <thead>
+            <tr>
+              <th class="py-2 px-4 text-left">Color</th>
+              <th class="py-2 px-4 text-left">RGB Code</th>
+              <th class="py-2 px-4 text-left">HEX Code</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for color in colors %}
+            <tr>
+              <td class="py-2 px-4">
+                <div
+                  class="w-28 h-12 rounded-md"
+                  style="background-color: {{ color.hex }}"
+                ></div>
+              </td>
+              <td class="py-2 px-4">{{ color.rgb }}</td>
+              <td class="py-2 px-4">{{ color.hex }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+    </section>
+
+    <div class="flex items-center justify-center py-8 mx-auto">
+      <h1 class="text-lavender-gray text-lg">
+        Made by
+        <a href="https://www.linkedin.com/in/rayyan-tausalkar-0b86202bb/"
+          >Rayyan Tausalkar</a
+        >
+      </h1>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
