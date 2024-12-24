@@ -1,9 +1,8 @@
 # Image Color Palette Generator
 
-![License](https://img.shields.io/badge/license-MIT-blue)  
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-
 The **Image Color Palette Generator** is a Python-based tool that extracts a color palette from an input image. It provides the HEX and RGB codes of the generated color palette. This tool is perfect for designers, developers, or anyone looking to generate visually appealing color schemes from images.
+
+---
 
 ## 🎨 Features
 - Extract 12 dominant colours from any image
